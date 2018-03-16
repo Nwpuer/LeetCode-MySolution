@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        vector<bool> x_bits, y_bits;
+        fun(x, x_bits);
+        fun(y, y_bits);
+        balance(x_bits, y_bits);
+        int count = 0;
+        auto size = x_bits.size();
+        for (int i = 0; i < size; i++) {
+            if (x_bits[i] != y_bits[i])
+                count++;
+        }
+        return count;
+    }
+    void fun(int num, vector<bool> &bits) {
+        if (num == 0) return;
+        bits.push_back(num % 2);
+        num = num / 2;
+        fun(num, bits);
+    }
+    void balance(vector<bool> &v1, vector<bool> &v2) {
+        if (v1.size() == v2.size()) return;
+        else if (v1.size() < v2.size()) {
+            while(v1.size() < v2.size())
+                v1.push_back(0);
+        }
+        else {
+            while(v2.size() < v1.size())
+                v2.push_back(0);
+        }
+    }
+};
