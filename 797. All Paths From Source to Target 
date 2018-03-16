@@ -1,0 +1,27 @@
+class Solution {
+public:
+    void dfs(vector<vector<int>>& graph, vector<vector<int>> &paths, vector<int> path, int src, int dst) {
+        //path不能是引用，paths得是引用，因为在dfs“回溯”的过程，paths得保持计算后的值，所以每次递归使用的paths是同一个
+        //而path得回到原来的值，所以每次递归应该复制一个path，使用的path不是同一个
+        path.push_back(src);
+        if (src == dst) {
+            paths.push_back(path);
+            return;
+        }
+        
+        for (int i = 0; i < graph[src].size(); i++) {
+            dfs(graph, paths, path, graph[src][i], dst);
+        }
+    }
+        
+        
+        
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
+        int N = graph.size();
+        vector<vector<int>> paths;
+        vector<int> path;
+        if (N == 0) return paths;
+        dfs(graph, paths, path, 0, N-1);
+        return paths;
+    }
+};
