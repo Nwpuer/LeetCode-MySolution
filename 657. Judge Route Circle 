@@ -1,0 +1,14 @@
+class Solution {
+public:
+    bool judgeCircle(string moves) {
+        int x = 0, y = 0;
+        for(auto beg = moves.cbegin(); beg != moves.cend(); beg++) {
+            if (*beg == 'R') ++x;
+            else if (*beg == 'L') --x;
+            else if (*beg == 'U') ++y;
+            else --y;
+        }
+        if (x == 0 && y == 0) return true;
+        else return false;
+    }
+};
