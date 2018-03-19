@@ -1,0 +1,45 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    
+    TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2) {
+        if (t1 && t2) {
+            TreeNode *root = new TreeNode(t1->val + t2->val);
+            root->left = mergeTrees(t1->left, t2->left);
+            root->right = mergeTrees(t1->right, t2->right);
+            return root;
+        }
+        else return t1? t1 : t2;
+        
+        //I can understand the code above, but I don't know why the (ugly) code below can't work
+        /*if (t1 == nullptr && t2 == nullptr) return nullptr;
+        else {
+            int val = 0;
+            if (t1 != nullptr) val += t1->val;
+            if (t2 != nullptr) val += t2->val;
+            TreeNode sum_node(val);
+            if (t1 == nullptr) {
+                sum_node.left = mergeTrees(nullptr, t2->left);
+                sum_node.right = mergeTrees(nullptr, t2->right);
+            }
+            else if (t2 == nullptr) {
+                sum_node.left = mergeTrees(t1->left, nullptr);
+                sum_node.right = mergeTrees(t1->right, nullptr);
+            }
+            else {
+                sum_node.left = mergeTrees(t1->left, t2->left);
+                sum_node.right = mergeTrees(t1->right, t2->right);
+            }
+            //sum_node.left = mergeTrees(t1->left, t2->left);
+            //sum_node.right = mergeTrees(t1->right, t2->right);
+            return &sum_node;*/
+    }
+};
