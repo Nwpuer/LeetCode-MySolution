@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool self_dividing(int i) {
+        vector<int> elements;
+        int input = i;
+        while (input > 0) {
+            elements.push_back(input % 10);
+            input /= 10;
+        }
+        for (auto cbeg = elements.cbegin(); cbeg < elements.cend(); cbeg++) {
+            if (*cbeg == 0) return false;
+            if (i % (*cbeg)) return false;
+        }
+        return true;
+    }
+    vector<int> selfDividingNumbers(int left, int right) {
+        vector<int> res;
+        for (int i = left; i <= right; i++)
+            if (self_dividing(i)) res.push_back(i);
+        return res;
+    }
+};
