@@ -1,0 +1,10 @@
+class Solution {
+public:
+    int arrayPairSum(vector<int>& nums) {
+        int sum = 0;
+        sort(nums.begin(), nums.end());
+        for (auto cbeg = nums.cbegin(); cbeg < nums.cend(); cbeg += 2)
+            sum += *cbeg;
+        return sum;
+    }
+};
