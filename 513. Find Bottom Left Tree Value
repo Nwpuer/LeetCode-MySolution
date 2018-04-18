@@ -1,0 +1,25 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int findBottomLeftValue(TreeNode* root) {
+        vector<TreeNode *> v1, v2;
+        v1.push_back(root);
+        while(!v1.empty()) {
+            v2.clear();
+            for (auto beg = v1.cbegin(); beg != v1.cend(); beg++) {
+                if ((*beg)->left) v2.push_back((*beg)->left);
+                if ((*beg)->right) v2.push_back((*beg)->right);
+            }
+            if (v2.empty()) return v1[0]->val;
+            else v1=v2;
+        }
+    }
+};
